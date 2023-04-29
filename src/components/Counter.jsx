@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   increment,
@@ -9,11 +9,11 @@ import {
 function Counter() {
   const count = useSelector((state) => state.value);
   const dispatch = useDispatch();
+  const [input, setInput] = useState(0);
 
-  const updateChange = (e) => {
-    console.log(e.target.value);
-    let value = Number(e.target.value);
-    dispatch(incrementByAmount(value));
+  const byAmount = (e) => {
+    e.preventDefault();
+    dispatch(incrementByAmount(Number(input)));
   };
 
   return (
@@ -21,8 +21,9 @@ function Counter() {
       <h1>{count}</h1>
       <button onClick={() => dispatch(increment())}>Increment</button>
       <button onClick={() => dispatch(decrement())}>Decrement</button>
-      <form>
-        <input type="number" onChange={updateChange} />
+      <form onSubmit={(e) => byAmount(e)}>
+        <input type="number" onChange={(e) => setInput(e.target.value)} />
+        <button type="submit">Submit</button>
       </form>
     </div>
   );
