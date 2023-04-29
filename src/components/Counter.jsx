@@ -7,7 +7,7 @@ import {
 } from "../features/counterSlice";
 
 function Counter() {
-  const count = useSelector((state) => state.value);
+  const count = useSelector((state) => state.counter.value);
   const dispatch = useDispatch();
   const [input, setInput] = useState(0);
 
@@ -18,6 +18,9 @@ function Counter() {
 
   return (
     <div>
+      <hr />
+      <h2>Counter</h2>
+      <hr />
       <h1>{count}</h1>
       <button onClick={() => dispatch(increment())}>Increment</button>
       <button onClick={() => dispatch(decrement())}>Decrement</button>
