@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addTodo, clearTodo, removeAt } from "../features/todoSlice";
+import { addTodo, clearTodo, remove } from "../features/todoSlice";
 
 function Todo() {
   const items = useSelector((state) => state.todo.items);
@@ -31,7 +31,11 @@ function Todo() {
       <button onClick={() => dispatch(clearTodo())}>Clear</button>
       <ul>
         {items.map((todoItem, index) => {
-          return <li key={index}>{todoItem}</li>;
+          return (
+            <li key={index} onClick={() => dispatch(remove(index))}>
+              {todoItem}
+            </li>
+          );
         })}
       </ul>
       <hr />
